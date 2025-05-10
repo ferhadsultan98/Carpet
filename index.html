@@ -1424,24 +1424,26 @@
 
 
             // --- Scroll to Top & Active Nav Link ---
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 300) scrollToTopButton.classList.add('show');
-                else scrollToTopButton.classList.remove('show');
+          window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) scrollToTopButton.classList.add('show');
+    else scrollToTopButton.classList.remove('show');
 
-                let currentSectionId = '';
-                document.querySelectorAll('section').forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    if (pageYOffset >= sectionTop - (var(--headerHeight) + 20) ) { // Header hündürlüyü + bir az margin
-                        currentSectionId = section.getAttribute('id');
-                    }
-                });
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${currentSectionId}`) {
-                        link.classList.add('active');
-                    }
-                });
-            });
+    let currentSectionId = '';
+    document.querySelectorAll('section').forEach(section => {
+        const sectionTop = section.offsetTop;
+        // Get the --headerHeight value from CSS
+        const headerHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--headerHeight'));
+        if (pageYOffset >= sectionTop - (headerHeight + 20)) { // Use the parsed number
+            currentSectionId = section.getAttribute('id');
+        }
+    });
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${currentSectionId}`) {
+            link.classList.add('active');
+        }
+    });
+});
             scrollToTopButton?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
             
             // Footer-da current year
