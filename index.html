@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xalça Dünyası - Ən Gözəl Xalçalar</title>
+    <style>
+        /* CSS Dəyişənləri (Variables) */
+        :root {
+            --primaryColor: #8B4513; /* SaddleBrown - Əsas rəng (isti qəhvəyi) */
+            --secondaryColor: #F5F5DC; /* Beige - Arxa fon rəngi */
+            --accentColor: #DAA520; /* Goldenrod - Vurğu rəngi */
+            --textColor: #333333;
+            --lightTextColor: #f1f1f1;
+            --whiteColor: #ffffff;
+            --footerBgColor: #2c2c2c;
+            --fontFamilyPrimary: 'Georgia', serif;
+            --fontFamilySecondary: 'Arial', sans-serif;
+            --sectionPadding: 60px 20px;
+            --cardShadow: 0 4px 8px rgba(0,0,0,0.1);
+            --smoothTransition: all 0.3s ease-in-out;
+        }
+
+        /* Ümumi Stilizasiya */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--fontFamilySecondary);
+            line-height: 1.6;
+            color: var(--textColor);
+            background-color: var(--whiteColor); /* Saytın ümumi arxa fonu */
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--fontFamilyPrimary);
+            color: var(--primaryColor);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accentColor);
+            transition: var(--smoothTransition);
+        }
+
+        a:hover {
+            color: var(--primaryColor);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .buttonPrimary {
+            display: inline-block;
+            background-color: var(--accentColor);
+            color: var(--whiteColor);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: var(--smoothTransition);
+            text-align: center;
+        }
+
+        .buttonPrimary:hover {
+            background-color: var(--primaryColor);
+        }
+
+        /* Header */
+        .siteHeader {
+            background-color: var(--whiteColor);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        .headerContainer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: var(--fontFamilyPrimary);
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primaryColor);
+        }
+
+        .mainNav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .mainNav ul li {
+            margin-left: 25px;
+        }
+
+        .mainNav ul li a {
+            color: var(--primaryColor);
+            font-weight: bold;
+            font-size: 1rem;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+        }
+
+        .mainNav ul li a:hover,
+        .mainNav ul li a.active {
+            color: var(--accentColor);
+            border-bottom: 2px solid var(--accentColor);
+        }
+
+        .cartButtonContainer {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cartIcon {
+            font-size: 1.5rem;
+            color: var(--primaryColor);
+            display: flex;
+            align-items: center;
+        }
+        .cartIcon svg {
+             width: 24px;
+             height: 24px;
+             fill: var(--primaryColor);
+        }
+
+
+        .cartItemCount {
+            position: absolute;
+            top: -8px;
+            right: -12px;
+            background-color: var(--accentColor);
+            color: var(--whiteColor);
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        /* Section Ümumi Stili */
+        .section {
+            padding: var(--sectionPadding);
+            min-height: 80vh; /* Parallax effekti üçün minimum hündürlük */
+            position: relative;
+            overflow: hidden; /* Parallax üçün */
+        }
+        /* Parallax Layering Illusion */
+        .section + .section { /* Hər sonrakı section üçün */
+            margin-top: -1px; /* Kiçik üst-üstə düşmə */
+        }
+
+        .section:nth-child(odd) {
+             background-color: var(--secondaryColor);
+        }
+        .section:nth-child(even) {
+             background-color: var(--whiteColor);
+        }
+
+
+        .sectionTitle {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .sectionTitle::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background-color: var(--accentColor);
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        /* Parallax Background Effect */
+        .parallaxBg {
+            background-attachment: fixed; /* Bu əsas parallax effektini yaradır */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Məzmunun arxasında qalması üçün */
+            opacity: 0.3; /* İstəyə görə şəffaflıq */
+        }
+
+
+        /* Home Section (Slider) */
+        #home {
+            padding: 0; /* Slayder tam enlikdə olacaq */
+            height: 100vh; /* Ekranı tam tutsun */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--whiteColor);
+            position: relative; /* Slayder elementləri üçün */
+            overflow: hidden; /* Slayder üçün */
+        }
+
+        .sliderContainer {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slideContent {
+            background-color: rgba(0,0,0,0.5);
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 70%;
+        }
+
+        .slideContent h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--whiteColor);
+        }
+        .slideContent h1::after{
+            display: none; /* Slider başlığında xətt olmasın */
+        }
+
+        .slideContent p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* About Section */
+        #about {
+           /* background-color: var(--secondaryColor); */
+        }
+        .aboutContent {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: center;
+        }
+        .aboutText {
+            flex: 1;
+            min-width: 300px;
+        }
+        .aboutImageSliderContainer {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px; /* Şəkil slayderinin maksimum eni */
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: var(--cardShadow);
+        }
+        .aboutSlide {
+            display: none; /* Başlanğıcda gizli */
+        }
+        .aboutSlide img {
+            width: 100%;
+            height: 350px; /* Slayder şəkillərinin hündürlüyü */
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .aboutSlide.active {
+            display: block;
+        }
+        .aboutSliderControls {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+        .aboutSliderControls .controlDot {
+            height: 12px;
+            width: 12px;
+            margin: 0 5px;
+            background-color: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .aboutSliderControls .controlDot.active {
+            background-color: var(--accentColor);
+        }
+
+
+        /* Products Section (Xalçalar) */
+        .productGrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .productCard {
+            background-color: var(--whiteColor);
+            border-radius: 10px;
+            box-shadow: var(--cardShadow);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .productCard:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .productImageContainer {
+            width: 100%;
+            height: 250px; /* Kart şəkillərinin hündürlüyü */
+            overflow: hidden;
+        }
+        .productImageContainer img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .productCard:hover .productImageContainer img {
+            transform: scale(1.1);
+        }
+
+        .productInfo {
+            padding: 20px;
+            flex-grow: 1; /* Məlumat hissəsinin böyüməsi üçün */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Məzmunu paylamaq üçün */
+        }
+
+        .productName {
+            font-size: 1.3rem;
+            color: var(--primaryColor);
+            margin-bottom: 10px;
+        }
+
+        .productPrice {
+            font-size: 1.2rem;
+            color: var(--accentColor);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .productActions {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px; /* Düymələr arasında məsafə */
+        }
+        .productActions .buttonPrimary {
+            flex-grow: 1; /* Düymələrin eyni eni tutması üçün */
+            font-size: 0.9rem;
+            padding: 8px 10px;
+        }
+
+
+        /* Advertisement Section */
+        #advertisement {
+            background-color: var(--accentColor);
+            color: var(--whiteColor);
+            text-align: center;
+        }
+        #advertisement .parallaxBg { /* Reklam üçün fərqli parallax */
+            background-image: url('https://via.placeholder.com/1920x1080/777/EEE?text=Xalca+Reklami+Arxafonu');
+            opacity: 0.2;
+        }
+
+        #advertisement .sectionTitle {
+            color: var(--whiteColor);
+        }
+        #advertisement .sectionTitle::after {
+            background-color: var(--whiteColor);
+        }
+        .advertisementContent h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--whiteColor);
+        }
+        .advertisementContent p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .advertisementContent .buttonPrimary {
+            background-color: var(--whiteColor);
+            color: var(--primaryColor);
+            padding: 12px 25px;
+            font-size: 1.1rem;
+        }
+        .advertisementContent .buttonPrimary:hover {
+            background-color: var(--secondaryColor);
+        }
+
+
+        /* Services Section */
+        /* #services { background-color: var(--secondaryColor); } */
+        .servicesGrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .serviceItem {
+            background-color: var(--whiteColor);
+            padding: 25px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: var(--cardShadow);
+            transition: var(--smoothTransition);
+        }
+        .serviceItem:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.12);
+        }
+
+        .serviceIcon {
+            font-size: 3rem; /* SVG istifadə etsəniz ölçünü tənzimləyin */
+            color: var(--accentColor);
+            margin-bottom: 15px;
+        }
+        .serviceIcon svg {
+            width: 50px;
+            height: 50px;
+            fill: var(--accentColor);
+            margin-bottom: 15px;
+        }
+
+        .serviceItem h4 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+
+        /* Contact Section */
+        .contactLayout {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .contactInfo, .contactMap {
+            flex: 1;
+            min-width: 300px;
+        }
+        .contactInfo h3 {
+            margin-bottom: 20px;
+        }
+        .contactDetail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+        .contactDetail .icon {
+            font-size: 1.5rem; /* SVG istifadə etsəniz ölçünü tənzimləyin */
+            color: var(--primaryColor);
+            margin-right: 15px;
+            width: 24px; /* İkon ölçüsü */
+        }
+        .contactDetail .icon svg{
+            width: 24px;
+            height: 24px;
+            fill: var(--primaryColor);
+        }
+
+        .contactMap iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: var(--cardShadow);
+        }
+
+        .socialIcons {
+            margin-top: 20px;
+        }
+        .socialIcons a {
+            margin-right: 15px;
+            font-size: 1.8rem; /* SVG istifadə etsəniz ölçünü tənzimləyin */
+            color: var(--primaryColor);
+        }
+        .socialIcons a svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--primaryColor);
+            transition: var(--smoothTransition);
+        }
+        .socialIcons a:hover svg {
+            fill: var(--accentColor);
+            transform: scale(1.1);
+        }
+
+
+        /* Footer */
+        .siteFooter {
+            background-color: var(--footerBgColor);
+            color: var(--lightTextColor);
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 40px; /* Son section ilə ara məsafəsi */
+        }
+        .siteFooter p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+        .siteFooter a {
+            color: var(--accentColor);
+        }
+
+
+        /* Scroll to Top Button */
+        .scrollToTopButton {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--accentColor);
+            color: var(--whiteColor);
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            font-size: 1.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none; /* Başlanğıcda gizli */
+            z-index: 999;
+            transition: background-color 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+        .scrollToTopButton.show {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+        }
+        .scrollToTopButton:hover {
+            background-color: var(--primaryColor);
+        }
+
+        /* Cart Modal */
+        .cartModal {
+            position: fixed;
+            top: 0;
+            right: -400px; /* Başlanğıcda kənarda */
+            width: 380px;
+            height: 100%;
+            background-color: var(--whiteColor);
+            box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            z-index: 1001;
+            transition: right 0.4s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .cartModal.open {
+            right: 0;
+        }
+        .cartModalHeader {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+        .cartModalHeader h3 {
+            margin: 0;
+        }
+        .closeCartButton {
+            font-size: 1.8rem;
+            color: var(--textColor);
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        .cartModalBody {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+        .cartItem {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .cartItem img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+        .cartItemInfo {
+            flex-grow: 1;
+        }
+        .cartItemInfo h4 {
+            font-size: 1rem;
+            margin: 0 0 5px 0;
+            color: var(--primaryColor);
+        }
+        .cartItemInfo p {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        .cartItemQuantity input {
+            width: 40px;
+            text-align: center;
+            margin: 0 5px;
+            padding: 3px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        .cartItemRemoveButton {
+            background: none;
+            border: none;
+            color: #ff0000;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 5px;
+        }
+
+        .cartModalFooter {
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+        .cartTotal {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .cartTotal span:first-child {
+            color: var(--primaryColor);
+        }
+
+        .emptyCartMessage {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+        }
+
+        /* Product Details Modal */
+        .productDetailsModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1002;
+            display: none; /* Başlanğıcda gizli */
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .productDetailsModal.show {
+            display: flex;
+            opacity: 1;
+        }
+        .productDetailsModalContent {
+            background-color: var(--whiteColor);
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 700px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .productDetailsModal.show .productDetailsModalContent {
+             transform: scale(1);
+        }
+
+        .closeDetailsButton {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 2rem;
+            color: var(--textColor);
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        .detailsLayout {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+        .detailsImageContainer {
+            flex: 1;
+            min-width: 250px;
+        }
+        .detailsImageContainer img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        .detailsInfo {
+            flex: 1.5;
+            min-width: 300px;
+        }
+        .detailsInfo h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        .detailsInfo .productPrice {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .detailsInfo p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        .detailsInfo .buttonPrimary { /* Səbətə əlavə et düyməsi modalda */
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        /* Mobil Naviqasiya */
+        .mobileMenuButton {
+            display: none; /* Standart olaraq gizli */
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--primaryColor);
+            cursor: pointer;
+        }
+
+        /* Responsivlik */
+        @media (max-width: 768px) {
+            .headerContainer {
+                flex-wrap: wrap; /* Mobil üçün headerdə elementlər alt-alta düşə bilər */
+            }
+            .mainNav {
+                display: none; /* Mobil üçün standart naviqasiya gizlədilir */
+                width: 100%;
+                order: 3; /* Səbət ikonundan sonra gəlsin */
+                margin-top: 10px;
+            }
+            .mainNav.active {
+                display: block; /* Mobil menyu açıldıqda göstərilir */
+            }
+            .mainNav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            .mainNav ul li {
+                margin: 10px 0;
+                width: 100%;
+                text-align: center;
+            }
+            .mainNav ul li a {
+                display: block;
+                padding: 10px;
+            }
+            .mobileMenuButton {
+                display: block; /* Mobildə menyu düyməsi göstərilir */
+            }
+
+            .slideContent h1 { font-size: 2rem; }
+            .slideContent p { font-size: 1rem; }
+            .slideContent .buttonPrimary { padding: 8px 15px; font-size: 0.9rem; }
+
+            .sectionTitle { font-size: 2rem; }
+            .aboutContent { flex-direction: column; }
+            .detailsLayout { flex-direction: column; }
+            .contactLayout { flex-direction: column; }
+
+            .cartModal { width: 95%; max-width: 320px; }
+            .productDetailsModalContent { padding: 20px; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="siteHeader">
+        <div class="headerContainer">
+            <div class="logo">Xalça Dünyası</div>
+            <nav class="mainNav" id="mainNav">
+                <ul>
+                    <li><a href="#home" class="active">Ana Səhifə</a></li>
+                    <li><a href="#about">Haqqımızda</a></li>
+                    <li><a href="#products">Xalçalar</a></li>
+                    <li><a href="#services">Xidmətlərimiz</a></li>
+                    <li><a href="#contact">Əlaqə</a></li>
+                </ul>
+            </nav>
+            <div class="cartButtonContainer" id="cartButtonContainer">
+                <span class="cartIcon">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M4 6.414L7.414 3H16.586L20 6.414V17a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V6.414zM6 7v10a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7H6zm12 .764V17a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1V7.764l2-2h8l2 2zM12 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
+                </span>
+                <span class="cartItemCount" id="cartItemCount">0</span>
+            </div>
+            <button class="mobileMenuButton" id="mobileMenuButton">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <section id="home">
+        <div class="sliderContainer" id="homeSlider">
+            </div>
+        <div class="parallaxBg" style="background-image: url('https://via.placeholder.com/1920x1080/D2B48C/fff?text=Fon+1'); opacity: 0.5;"></div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="sectionTitle">Haqqımızda</h2>
+            <div class="aboutContent">
+                <div class="aboutText">
+                    <h3>Xalçalarımızla Evinizə İncəsənət Qatın</h3>
+                    <p>Biz sizə ənənəvi naxışlardan müasir dizaynlara qədər geniş çeşiddə yüksək keyfiyyətli xalçalar təqdim edirik. Hər bir xalçamız sevgi və diqqətlə hazırlanmışdır.</p>
+                    <p>Məqsədimiz, evinizi və ya ofisinizi daha isti, daha rahat və daha gözəl etmək üçün sizə mükəmməl xalçanı tapmaqda kömək etməkdir. Xalçalarımız təkcə bir dekor elementi deyil, həm də bir tarix və mədəniyyət daşıyıcısıdır.</p>
+                    <a href="#products" class="buttonPrimary">Kolleksiyamıza Baxın</a>
+                </div>
+                <div class="aboutImageSliderContainer" id="aboutSlider">
+                     </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="products" class="section">
+        <div class="container">
+            <h2 class="sectionTitle">Xalçalarımız</h2>
+            <div class="productGrid" id="productGrid">
+                </div>
+        </div>
+    </section>
+
+    <section id="advertisement" class="section">
+        <div class="parallaxBg" style="background-image: url('https://via.placeholder.com/1920x1080/A0522D/FFF?text=Reklam+Fon'); opacity: 0.4;"></div>
+        <div class="container">
+            <h2 class="sectionTitle">Xüsusi Təklif!</h2>
+            <div class="advertisementContent">
+                <h3>Seçilmiş "Şah Əsəri" Xalçası - 30% Endirim!</h3>
+                <p>Bu həftəyə özəl, əl ilə toxunmuş, təbii ipək və yun qarışığından hazırlanmış "Şah Əsəri" xalçamızda inanılmaz endirim. Evinizə şahənə bir gözəllik qatın!</p>
+                <a href="#" class="buttonPrimary" data-product-id="special1">İndi Alın</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section">
+        <div class="container">
+            <h2 class="sectionTitle">Xidmətlərimiz</h2>
+            <div class="servicesGrid">
+                <div class="serviceItem">
+                    <div class="serviceIcon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.828 3H11v2H9.828A6.511 6.511 0 004.041 9.787L2.627 8.373A8.512 8.512 0 019.828 3zM13 3h1.172a8.512 8.512 0 017.201 5.373l-1.414 1.414A6.511 6.511 0 0013 5V3zm0 18h-2v-2.172a6.511 6.511 0 00-4.787-5.787L7.627 11.627A8.512 8.512 0 0111 21v-2zm2 0v2h2.172a8.512 8.512 0 005.373-7.201l-1.414-1.414A6.511 6.511 0 0115 18.172V21h-2zM12 8a4 4 0 110 8 4 4 0 010-8zm0 2a2 2 0 100 4 2 2 0 000-4z"/></svg>
+                    </div>
+                    <h4>Xalça Yuma</h4>
+                    <p>Xalçalarınızı peşəkar üsullarla təmizləyirik, ilk günkü kimi təravətli edirik.</p>
+                </div>
+                <div class="serviceItem">
+                    <div class="serviceIcon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.243 2.757C16.082 1.596 14.544 1 12.96 1s-3.122.596-4.283 1.757L3 8.414V21h18V8.414l-5.757-5.657zM19 19H5V9.586l5.243-5.243c.58-.58 1.35-.899 2.161-.899.024 0 .047.002.07.002C13.275 3.47 14 4.18 14 5a1 1 0 01-.293.707L12 7.414V10h1v-.586l2-2V3.13c.743.395 1.38 1.033 1.827 1.78L19 8.414V19zM11 10V7.414l-1.707-1.707A1.001 1.001 0 019 5c0-.82.725-1.53 1.526-1.558.023-.002.046-.002.07-.002.811 0 1.581.318 2.161.899L14.586 6H13l-2 2v2h-1zM8 12h8v2H8v-2zm0 4h8v2H8v-2z"/></svg>
+                    </div>
+                    <h4>Xalça Təmiri</h4>
+                    <p>Zədələnmiş xalçalarınızı bərpa edir, onlara yeni həyat veririk.</p>
+                </div>
+                <div class="serviceItem">
+                    <div class="serviceIcon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.587 5.713l-1.874-3.332A2.004 2.004 0 0016.008 1H7.992a2 2 0 00-1.705 1.381L4.413 5.713H2v14a2 2 0 002 2h16a2 2 0 002-2V5.713h-2.413zM7.992 3h8.016L17.31 5H6.69L7.992 3zM20 19.713a.287.287 0 01-.286.287H4.286A.287.287 0 014 19.713V7h16v12.713zM15 10h2v2h-2v-2zm-4 0h2v2h-2v-2zm-4 0h2v2H7v-2zm8 4h2v2h-2v-2zm-4 0h2v2h-2v-2zm-4 0h2v2H7v-2z"/></svg>
+                    </div>
+                    <h4>Evə Çatdırılma</h4>
+                    <p>Sifariş etdiyiniz xalçaları qapınıza qədər təhlükəsiz şəkildə çatdırırıq.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="parallaxBg" style="background-image: url('https://via.placeholder.com/1920x1080/E6E6FA/333?text=Elaqe+Fon'); opacity: 0.6;"></div>
+        <div class="container">
+            <h2 class="sectionTitle">Bizimlə Əlaqə</h2>
+            <div class="contactLayout">
+                <div class="contactInfo">
+                    <h3>Məlumatlar</h3>
+                    <div class="contactDetail">
+                        <span class="icon">
+                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20.899l-.012-.01C7.196 17.308 4 13.072 4 9.5 4 5.364 7.582 2 12 2s8 3.364 8 7.5c0 3.572-3.196 7.808-7.988 11.388L12 20.899zm0-15.399c-2.961 0-5.5 2.217-5.5 5S9.039 15.68 12 18.717c2.961-3.038 5.5-6.217 5.5-8.717s-2.539-5.5-5.5-5.5zM12 12a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"/></svg>
+                        </span>
+                        <span>Bakı şəhəri, Nizami küçəsi 123</span>
+                    </div>
+                    <div class="contactDetail">
+                        <span class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.75 15.255C17.53 15.15 15.595 14.214 15.32 14.11c-.274-.104-.472-.155-.67.155-.197.31-.728.934-.893 1.118-.164.183-.33.208-.602.078-.273-.129-1.148-.423-2.188-1.345-.808-.717-1.35-1.606-1.508-1.882-.158-.276-.017-.425.09-.556.098-.12.22-.284.33-.425.11-.142.148-.236.222-.393.075-.157.037-.283-.018-.413s-.67-.81-.92-1.118c-.248-.308-.498-.266-.67-.27-.163-.006-.361-.006-.56-.006-.198 0-.52.074-.792.362-.274.286-1.046 1.016-1.046 2.477 0 1.462 1.072 2.877 1.228 3.085.156.208 2.088 3.34 5.058 4.718.713.327 1.266.524 1.7.67.746.252 1.415.217 1.947.132.587-.095 1.76-.718 2.008-1.412.248-.695.248-1.29.173-1.413-.074-.123-.273-.208-.47-.31zM12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+                        </span>
+                        <span>+994 50 123 45 67</span>
+                    </div>
+                    <div class="contactDetail">
+                        <span class="icon">
+                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2zm0 2l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
+                        </span>
+                        <span>info@xalcadunyasi.az</span>
+                    </div>
+                    <div class="socialIcons">
+                        <a href="#" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 011.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122s-.013 3.056-.06 4.122c-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 01-1.153 1.772c-.556.555-1.112.9-1.772 1.153-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06s-3.056-.013-4.122-.06c-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 01-1.772-1.153 4.904 4.904 0 01-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12s.013-3.056.06-4.122c.05-1.065.217-1.79.465-2.428a4.88 4.88 0 011.153-1.772A4.897 4.897 0 013.398 2.53c.638-.248 1.363-.415 2.428-.465C6.944 2.013 7.283 2 10 2h4zm0 2H8c-2.401 0-2.688.009-3.637.052-.877.04-.978.244-1.193.654-.15.288-.302.58-.49.943-.187.364-.392.465-.653 1.193-.045.95-.053 1.236-.053 3.637s.008 2.688.053 3.637c.04.877.244.978.654 1.193.287.15.579.302.942.49.363.187.464.392 1.192.653.95.045 1.236.053 3.637.053s2.688-.008 3.637-.053c.877-.04.978-.244 1.193-.653.15-.288.302-.58.49-.943.188-.364.393-.465.654-1.193.045-.95.053-1.236.053-3.637s-.008-2.688-.053-3.637c-.04-.877-.244-.978-.654-1.193-.288-.15-.58-.302-.943-.49-.364-.188-.465-.392-1.193-.654-.95-.045-1.237-.053-3.638-.053zm0 4.865A3.135 3.135 0 1012 15.135a3.135 3.135 0 000-6.27zm0 5.27A2.135 2.135 0 1112 9.135a2.135 2.135 0 010 4.27zM16.95 6.572a1.077 1.077 0 100 2.154 1.077 1.077 0 000-2.154z"/></svg></a>
+                        <a href="#" title="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3.5 5h-2.155c-.403 0-.56.186-.56.55v1.05h2.65l-.35 2.5h-2.3V19H9.5v-7.9h-2V8.6h2V7.3C9.5 5.42 10.674 4.5 12.514 4.5H15.5V7z"/></svg></a>
+                        <a href="#" title="WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" ><path d="M12.031 2.005c-5.521 0-9.995 4.476-9.995 9.998 0 1.773.463 3.44 1.281 4.911L2 22l5.246-1.371c1.43.759 3.044 1.179 4.754 1.179h.031c5.521 0 10-4.476 10-9.998s-4.479-9.995-10-9.995zm0 18.163c-1.487 0-2.903-.389-4.147-1.086l-.3-.176-3.072.804.818-2.994-.193-.314a8.14 8.14 0 01-1.257-4.427c0-4.515 3.669-8.183 8.188-8.183 2.207 0 4.234.863 5.788 2.416 1.553 1.553 2.412 3.58 2.412 5.783.001 4.514-3.668 8.187-8.184 8.187zm4.782-6.372c-.273-.137-1.617-.797-1.869-.887-.252-.09-.435-.137-.618.136-.184.273-.706.887-.865 1.06-.159.173-.319.193-.591.056-.273-.136-1.148-.422-2.188-1.346-.808-.717-1.351-1.607-1.509-1.882-.159-.274-.017-.423.12-.559.124-.124.273-.326.41-.49.137-.163.184-.273.273-.456.09-.184.045-.343-.023-.48-.068-.136-.617-1.485-.844-2.032-.226-.548-.453-.473-.618-.48-.157-.006-.34-.006-.522-.006-.184 0-.479.068-.731.343-.252.273-1.003.983-1.003 2.397s1.026 2.791 1.163 2.998c.137.207 1.965 3.149 4.809 4.401.68.303 1.218.486 1.636.624.726.242 1.371.207 1.882.126.565-.091 1.617-.66 1.844-1.29.228-.632.228-1.172.159-1.291-.069-.126-.252-.207-.525-.344z"/></svg></a>
+                    </div>
+                </div>
+                <div class="contactMap">
+                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3039.748321739087!2d49.8420833153004!3d40.37012497937006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d4ec5fe0247%3A0x72ac13df5a87f6d8!2sNizami%20Street!5e0!3m2!1sen!2saz!4v1678886037782!5m2!1sen!2saz" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="siteFooter">
+        <div class="container">
+            <p>&copy; <span id="currentYear"></span> Xalça Dünyası. Bütün hüquqlar qorunur.</p>
+            <p>Fərhad Sultan tərəfindən yaradılmışdır.</p>
+        </div>
+    </footer>
+
+    <div class="scrollToTopButton" id="scrollToTopButton">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="white"><path d="M11.9999 10.8284L7.04992 15.7784L5.6357 14.3642L11.9999 8L18.3641 14.3642L16.9499 15.7784L11.9999 10.8284Z"></path></svg>
+    </div>
+
+    <div class="cartModal" id="cartModal">
+        <div class="cartModalHeader">
+            <h3>Səbətiniz</h3>
+            <button class="closeCartButton" id="closeCartButton">&times;</button>
+        </div>
+        <div class="cartModalBody" id="cartModalBody">
+            <p class="emptyCartMessage">Səbətiniz boşdur.</p>
+        </div>
+        <div class="cartModalFooter">
+            <div class="cartTotal">
+                <span>Cəmi:</span>
+                <span id="cartTotalAmount">0 AZN</span>
+            </div>
+            <button class="buttonPrimary" style="width:100%;">Sifarişi Tamamla</button>
+        </div>
+    </div>
+
+    <div class="productDetailsModal" id="productDetailsModal">
+        <div class="productDetailsModalContent">
+            <button class="closeDetailsButton" id="closeDetailsButton">&times;</button>
+            <div class="detailsLayout">
+                <div class="detailsImageContainer">
+                    <img src="" alt="Xalça Detalı" id="detailsImage">
+                </div>
+                <div class="detailsInfo">
+                    <h2 id="detailsName"></h2>
+                    <p class="productPrice" id="detailsPrice"></p>
+                    <p><strong>Ölçü:</strong> <span id="detailsSize"></span></p>
+                    <p><strong>Material:</strong> <span id="detailsMaterial"></span></p>
+                    <p><strong>Təsvir:</strong></p>
+                    <p id="detailsDescription"></p>
+                    <button class="buttonPrimary addToCartButton" id="detailsAddToCartButton" data-product-id="">Səbətə Əlavə Et</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Elementlərin seçilməsi ---
+            const homeSlider = document.getElementById('homeSlider');
+            const aboutSlider = document.getElementById('aboutSlider');
+            const productGrid = document.getElementById('productGrid');
+            const cartButton = document.getElementById('cartButtonContainer');
+            const cartModal = document.getElementById('cartModal');
+            const closeCartButton = document.getElementById('closeCartButton');
+            const cartItemCount = document.getElementById('cartItemCount');
+            const cartModalBody = document.getElementById('cartModalBody');
+            const cartTotalAmount = document.getElementById('cartTotalAmount');
+            const productDetailsModal = document.getElementById('productDetailsModal');
+            const closeDetailsButton = document.getElementById('closeDetailsButton');
+            const scrollToTopButton = document.getElementById('scrollToTopButton');
+            const mainNav = document.getElementById('mainNav');
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const navLinks = document.querySelectorAll('.mainNav a');
+
+            // --- Məlumatlar (Products & Sliders) ---
+            const homeSlidesData = [
+                {
+                    image: 'https://via.placeholder.com/1920x1080/8B4513/FFFFFF?text=Ən+Gözəl+Xalçalar',
+                    title: 'Xalça Dükanımıza Xoş Gəlmisiniz!',
+                    subtitle: 'Eviniz üçün ənənəvi və müasir dizaynlı xalçalar.',
+                    buttonText: 'Kolleksiyaya Baxın',
+                    buttonLink: '#products'
+                },
+                {
+                    image: 'https://via.placeholder.com/1920x1080/A0522D/FFFFFF?text=Keyfiyyət+və+Gözəllik',
+                    title: 'Keyfiyyət və Gözəllik Bir Arada',
+                    subtitle: 'Əl ilə toxunmuş, təbii materiallardan hazırlanmış xalçalar.',
+                    buttonText: 'Haqqımızda',
+                    buttonLink: '#about'
+                },
+                {
+                    image: 'https://via.placeholder.com/1920x1080/CD853F/FFFFFF?text=Xüsusi+Endirimlər',
+                    title: 'Mövsümi Endirimlərdən Yararlanın!',
+                    subtitle: 'Seçilmiş xalçalara xüsusi təkliflər.',
+                    buttonText: 'Endirimlər',
+                    buttonLink: '#products' // Ya da xüsusi endirim bölməsi
+                }
+            ];
+
+            const aboutSlidesData = [
+                { image: 'https://via.placeholder.com/600x400/D2B48C/333?text=Xalça+Toxuma+Prosesi', alt: 'Xalça Toxuma Prosesi' },
+                { image: 'https://via.placeholder.com/600x400/BC8F8F/333?text=Ənənəvi+Naxışlar', alt: 'Ənənəvi Naxışlar' },
+                { image: 'https://via.placeholder.com/600x400/B0C4DE/333?text=Müasir+Dizaynlar', alt: 'Müasir Dizaynlar' }
+            ];
+
+            const productsData = [
+                { id: 'p1', name: 'Qarabağ Xalçası "Şuşa"', price: 750, image: 'https://via.placeholder.com/400x300/8B4513/FFFFFF?text=Qarabağ+Xalçası', size: '200x300 sm', material: 'Yun', description: 'Ənənəvi Qarabağ naxışları ilə bəzədilmiş, yüksək keyfiyyətli yun xalça.' },
+                { id: 'p2', name: 'İrəvan Xalçası "Gövhər"', price: 920, image: 'https://via.placeholder.com/400x300/A0522D/FFFFFF?text=İrəvan+Xalçası', size: '180x270 sm', material: 'İpək və Yun', description: 'İncə naxışlı, ipək və yun qarışığından hazırlanmış gözəl İrəvan xalçası.' },
+                { id: 'p3', name: 'Təbriz Xalçası "Ləçəkturan"', price: 1200, image: 'https://via.placeholder.com/400x300/CD853F/FFFFFF?text=Təbriz+Xalçası', size: '220x320 sm', material: 'İpək', description: 'Məşhur Təbriz məktəbinə aid, zərif Ləçəkturan kompozisiyalı ipək xalça.' },
+                { id: 'p4', name: 'Müasir Dizaynlı Xalça "Abstrakt"', price: 550, image: 'https://via.placeholder.com/400x300/D2B48C/333?text=Müasir+Xalça', size: '160x230 sm', material: 'Sintetik liflər', description: 'Müasir interyerlər üçün ideal, abstrakt naxışlı, davamlı xalça.' },
+                { id: 'p5', name: 'Uşaq Otağı Üçün Xalça "Nağıl"', price: 350, image: 'https://via.placeholder.com/400x300/ADD8E6/333?text=Uşaq+Xalçası', size: '120x180 sm', material: 'Hipoallergenik material', description: 'Rəngarəng və əyləncəli dizaynı ilə uşaq otaqları üçün mükəmməl seçim.' },
+                { id: 'p6', name: 'Klassik Gəncə Xalçası', price: 880, image: 'https://via.placeholder.com/400x300/BDB76B/FFFFFF?text=Gəncə+Xalçası', size: '190x290 sm', material: 'Yun', description: 'Ənənəvi Gəncə naxışları ilə, sıx toxunuşlu keyfiyyətli yun xalça.' },
+                { id: 'special1', name: 'Seçilmiş "Şah Əsəri" Xalçası', price: 2500, originalPrice: 3570, image: 'https://via.placeholder.com/400x300/DAA520/000?text=Şah+Əsəri', size: '250x350 sm', material: 'Təbii İpək və Yun', description: 'Xüsusi endirimli, əl ilə toxunmuş, təbii ipək və yun qarışığından hazırlanmış "Şah Əsəri" xalçası.' }
+            ];
+
+            let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+
+            // --- Funksiyalar ---
+
+            // Slider Funksiyası (Ümumi)
+            function createSlider(sliderElement, slidesData, isHomeSlider = false, isAboutSlider = false) {
+                if (!sliderElement) return;
+                let currentSlideIndex = 0;
+                sliderElement.innerHTML = ''; // Əvvəlki slayderi təmizlə
+
+                slidesData.forEach((slideData, index) => {
+                    const slideDiv = document.createElement('div');
+                    if (isHomeSlider) {
+                        slideDiv.classList.add('slide');
+                        slideDiv.style.backgroundImage = `url('${slideData.image}')`;
+                        slideDiv.innerHTML = `
+                            <div class="slideContent">
+                                <h1>${slideData.title}</h1>
+                                <p>${slideData.subtitle}</p>
+                                <a href="${slideData.buttonLink}" class="buttonPrimary">${slideData.buttonText}</a>
+                            </div>
+                        `;
+                    } else if (isAboutSlider) {
+                        slideDiv.classList.add('aboutSlide');
+                        slideDiv.innerHTML = `<img src="${slideData.image}" alt="${slideData.alt || 'Haqqımızda şəkil'}">`;
+                    }
+                    if (index === 0) slideDiv.classList.add('active');
+                    sliderElement.appendChild(slideDiv);
+                });
+                
+                const slides = sliderElement.querySelectorAll(isHomeSlider ? '.slide' : '.aboutSlide');
+                if (slides.length === 0) return;
+
+                function showSlide(index) {
+                    slides.forEach(s => s.classList.remove('active'));
+                    slides[index].classList.add('active');
+                    if(isAboutSlider) updateDots(index);
+                }
+
+                let dotsContainer;
+                if (isAboutSlider) {
+                    dotsContainer = document.createElement('div');
+                    dotsContainer.classList.add('aboutSliderControls');
+                    slidesData.forEach((_, index) => {
+                        const dot = document.createElement('span');
+                        dot.classList.add('controlDot');
+                        if(index === 0) dot.classList.add('active');
+                        dot.addEventListener('click', () => {
+                            currentSlideIndex = index;
+                            showSlide(currentSlideIndex);
+                        });
+                        dotsContainer.appendChild(dot);
+                    });
+                    sliderElement.appendChild(dotsContainer);
+                }
+                
+                function updateDots(index) {
+                    if (!dotsContainer) return;
+                    const allDots = dotsContainer.querySelectorAll('.controlDot');
+                    allDots.forEach(d => d.classList.remove('active'));
+                    allDots[index].classList.add('active');
+                }
+
+
+                function nextSlide() {
+                    currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+                    showSlide(currentSlideIndex);
+                }
+
+                if (slides.length > 1) {
+                    setInterval(nextSlide, isHomeSlider ? 5000 : 4000); // Home slayderi daha uzun interval
+                }
+                showSlide(0); // İlk slaydı göstər
+            }
+
+
+            // Məhsulları Göstərmək
+            function displayProducts() {
+                if (!productGrid) return;
+                productGrid.innerHTML = '';
+                productsData.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.classList.add('productCard');
+                    productCard.innerHTML = `
+                        <div class="productImageContainer">
+                            <img src="${product.image}" alt="${product.name}">
+                        </div>
+                        <div class="productInfo">
+                            <div>
+                                <h3 class="productName">${product.name}</h3>
+                                <p class="productPrice">${product.price} AZN</p>
+                            </div>
+                            <div class="productActions">
+                                <button class="buttonPrimary viewDetailsButton" data-product-id="${product.id}">Ətraflı Bax</button>
+                                <button class="buttonPrimary addToCartButton" data-product-id="${product.id}">Səbətə Əlavə Et</button>
+                            </div>
+                        </div>
+                    `;
+                    productGrid.appendChild(productCard);
+                });
+            }
+
+            // Məhsul Detalları Modalını Göstərmək
+            function showProductDetails(productId) {
+                const product = productsData.find(p => p.id === productId);
+                if (!product) return;
+
+                document.getElementById('detailsImage').src = product.image;
+                document.getElementById('detailsImage').alt = product.name;
+                document.getElementById('detailsName').textContent = product.name;
+                document.getElementById('detailsPrice').textContent = `${product.price} AZN`;
+                document.getElementById('detailsSize').textContent = product.size;
+                document.getElementById('detailsMaterial').textContent = product.material;
+                document.getElementById('detailsDescription').textContent = product.description;
+                document.getElementById('detailsAddToCartButton').dataset.productId = product.id; // Səbətə əlavə et düyməsinə ID təyin et
+
+                productDetailsModal.classList.add('show');
+            }
+
+            // Səbətə Əlavə Etmək
+            function addToCart(productId, quantity = 1) {
+                const product = productsData.find(p => p.id === productId);
+                if (!product) return;
+
+                const existingItem = cart.find(item => item.id === productId);
+                if (existingItem) {
+                    existingItem.quantity += quantity;
+                } else {
+                    cart.push({ ...product, quantity: quantity });
+                }
+                updateCart();
+                 // Kiçik animasiya və ya bildiriş
+                cartButton.classList.add('shake');
+                setTimeout(() => cartButton.classList.remove('shake'), 300);
+            }
+            
+            // Səbətdən Silmək
+            function removeFromCart(productId) {
+                cart = cart.filter(item => item.id !== productId);
+                updateCart();
+            }
+
+            // Səbətdəki Sayı Dəyişmək
+            function updateQuantityInCart(productId, newQuantity) {
+                 const itemInCart = cart.find(item => item.id === productId);
+                 if(itemInCart) {
+                    if(newQuantity <= 0) {
+                        removeFromCart(productId);
+                    } else {
+                        itemInCart.quantity = newQuantity;
+                    }
+                 }
+                 updateCart();
+            }
+
+
+            // Səbəti Yeniləmək (UI və localStorage)
+            function updateCart() {
+                localStorage.setItem('shoppingCart', JSON.stringify(cart));
+                renderCartItems();
+                updateCartIcon();
+                updateCartTotal();
+            }
+
+            // Səbət İkonunu Yeniləmək
+            function updateCartIcon() {
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartItemCount.textContent = totalItems;
+                cartItemCount.style.display = totalItems > 0 ? 'block' : 'none';
+            }
+
+            // Səbət Məbləğini Yeniləmək
+            function updateCartTotal() {
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                cartTotalAmount.textContent = `${total.toFixed(2)} AZN`;
+            }
+
+            // Səbət Məhsullarını Göstərmək (Modalda)
+            function renderCartItems() {
+                if (cart.length === 0) {
+                    cartModalBody.innerHTML = '<p class="emptyCartMessage">Səbətiniz boşdur.</p>';
+                } else {
+                    cartModalBody.innerHTML = cart.map(item => `
+                        <div class="cartItem" data-product-id="${item.id}">
+                            <img src="${item.image}" alt="${item.name}">
+                            <div class="cartItemInfo">
+                                <h4>${item.name}</h4>
+                                <p>Qiymət: ${item.price} AZN</p>
+                                <p>Say: 
+                                    <input type="number" class="cartItemQuantityInput" value="${item.quantity}" min="1" data-product-id="${item.id}">
+                                </p>
+                            </div>
+                            <button class="cartItemRemoveButton" data-product-id="${item.id}">&times;</button>
+                        </div>
+                    `).join('');
+                }
+            }
+
+            // Scroll to Top Düyməsi
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    scrollToTopButton.classList.add('show');
+                } else {
+                    scrollToTopButton.classList.remove('show');
+                }
+            });
+
+            // Headerin arxa fonunun dəyişməsi
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('.siteHeader');
+                if (window.scrollY > 50) {
+                    header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                    header.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+                } else {
+                    header.style.backgroundColor = 'var(--whiteColor)';
+                     header.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
+                }
+            });
+
+            // Naviqasiya linklərinin aktiv vəziyyəti
+            window.addEventListener('scroll', () => {
+                let currentSection = '';
+                const sections = document.querySelectorAll('section');
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 70) { // 70 header hündürlüyü
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === currentSection) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+            
+            // --- Event Listener'lar ---
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mainNav.classList.toggle('active');
+                });
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                    }
+                });
+            });
+
+
+            if (cartButton) {
+                cartButton.addEventListener('click', () => cartModal.classList.add('open'));
+            }
+            if (closeCartButton) {
+                closeCartButton.addEventListener('click', () => cartModal.classList.remove('open'));
+            }
+            
+            // Səbət modalında say dəyişikliyi və silmə
+            cartModalBody.addEventListener('click', (e) => {
+                if (e.target.classList.contains('cartItemRemoveButton')) {
+                    removeFromCart(e.target.dataset.productId);
+                }
+            });
+            cartModalBody.addEventListener('change', (e) => {
+                 if (e.target.classList.contains('cartItemQuantityInput')) {
+                    const productId = e.target.dataset.productId;
+                    const newQuantity = parseInt(e.target.value);
+                    updateQuantityInCart(productId, newQuantity);
+                }
+            });
+
+
+            if (productGrid) {
+                productGrid.addEventListener('click', e => {
+                    if (e.target.classList.contains('addToCartButton')) {
+                        addToCart(e.target.dataset.productId);
+                    }
+                    if (e.target.classList.contains('viewDetailsButton')) {
+                        showProductDetails(e.target.dataset.productId);
+                    }
+                });
+            }
+            
+            // Reklam bölməsindəki "İndi Alın" düyməsi
+            const specialOfferButton = document.querySelector('#advertisement .buttonPrimary');
+            if(specialOfferButton && specialOfferButton.dataset.productId) {
+                specialOfferButton.addEventListener('click', (e) => {
+                    e.preventDefault(); // Linkin standart davranışını dayandır
+                    addToCart(specialOfferButton.dataset.productId);
+                    // İstəyə görə səbətə yönləndirə və ya mesaj göstərə bilərsiniz
+                    cartModal.classList.add('open'); // Səbəti aç
+                });
+            }
+
+
+            if (closeDetailsButton) {
+                closeDetailsButton.addEventListener('click', () => {
+                    productDetailsModal.classList.remove('show');
+                    // Modal bağlandıqda transformu sıfırla
+                    setTimeout(() => {
+                       if (!productDetailsModal.classList.contains('show')) {
+                           productDetailsModal.querySelector('.productDetailsModalContent').style.transform = 'scale(0.9)';
+                       }
+                    }, 300); // Transition duration
+                });
+            }
+            
+            // Modal xaricində klikləmə ilə bağlama
+            if (productDetailsModal) {
+                productDetailsModal.addEventListener('click', (e) => {
+                    if (e.target === productDetailsModal) { // Yalnız arxa fona kliklədikdə
+                       productDetailsModal.classList.remove('show');
+                       setTimeout(() => {
+                           if (!productDetailsModal.classList.contains('show')) {
+                               productDetailsModal.querySelector('.productDetailsModalContent').style.transform = 'scale(0.9)';
+                           }
+                        }, 300);
+                    }
+                });
+            }
+            
+            // Detallar modalındakı "Səbətə Əlavə Et" düyməsi
+            const detailsAddToCartBtn = document.getElementById('detailsAddToCartButton');
+            if (detailsAddToCartBtn) {
+                detailsAddToCartBtn.addEventListener('click', (e) => {
+                    addToCart(e.target.dataset.productId);
+                    productDetailsModal.classList.remove('show'); // Modalı bağla
+                     // Kiçik animasiya və ya bildiriş
+                    cartButton.classList.add('shake');
+                    setTimeout(() => cartButton.classList.remove('shake'), 300);
+                });
+            }
+
+
+            if (scrollToTopButton) {
+                scrollToTopButton.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+            
+            // Footer-da current year
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // --- İlkin Yükləmələr ---
+            createSlider(homeSlider, homeSlidesData, true, false);
+            createSlider(aboutSlider, aboutSlidesData, false, true);
+            displayProducts();
+            updateCart(); // Səhifə yükləndikdə səbəti yenilə (localStorage-dən)
+        });
+    </script>
+</body>
+</html>
